@@ -13,6 +13,7 @@ from pandocfilters import *
 
 home = os.environ['HOME']
 dbasePath = home + '/.pandoc/dbase'# path to abbrev dbase file
+#dbasePath = 'a/path/of/your/choice'# user selected path
 abbrevlist = {}# create empty dictionary for abbrev=expansion list
 f = open(dbasePath, 'r')# open dbase file for reading
 
