@@ -1,5 +1,5 @@
 # pandoc-abbreviations
-Pandoc filter in python to replace listed abbreviations with their expansions.
+Python filter for [pandoc](http://pandoc.org/index.html), replaces user-defined abbreviations with their expansions.
 
 # This project's aim
 This project was created to provide a simple alternative to the kind of user-definable macros available in LaTeX, for instance...
@@ -9,9 +9,9 @@ This project was created to provide a simple alternative to the kind of user-def
 \newcommand{\osh}{oshigami}
 ```
 
-which , when the source document is processed, replace the abbreviations (i.e. `\hb` above) with the word in the final curly brackets, the expansion.
+which , when the source document is processed, replace the typed abbreviations (i.e. `\hb` above) with the word in the final curly brackets, the expansion.
 
-This is useful to me, as I am sure it is to many writers, as a way of ensuring consistency across uses of a single term or phrase. For instance, I write about the mass media in Japan, so I mention the titles of newspapers quite a lot; some journals want the Japanese term for newspaper transliterated 'shimbun' and some want 'shinbun'. I eventually realised, after initially going down the obvious 'search-replace' route, that it would just be easier to be able to replace every occurrence with an abbreviation (the macros mentioned above when I was writing in LaTeX) that could be adjusted ad hoc. And this is my attempt to bring that convenience to writing in pandoc markdown.
+This is useful to me, as I am sure it is to many writers, as a way of ensuring consistency across uses of a single term or phrase. For instance, I write about the mass media in Japan, so I mention the titles of newspapers quite a lot; some journals want the Japanese term for newspaper transliterated 'shimbun' and some want 'shinbun'. I eventually realised, after initially going down the obvious 'search-replace' route, that it would just be easier to be able to replace every occurrence with an abbreviation (the macros mentioned above when I was writing in LaTeX) the expansion of which could be adjusted ad hoc. And this is my attempt to replicate that convenience when writing in pandoc markdown.
 
 # Installation
 'Installing' seems like rather a grand word for this: Copy the `abbrevs.py` file into your home directory's `.pandoc/filters/` directory.
@@ -30,9 +30,7 @@ It doesn't really matter which but you should know that abbreviations defined in
 
 ## The 'dbase' file
 
-Create a file called 'dbase' and place it in your home directory's `.pandoc` directory, along with all that other good stuff.[^if]
-
-[^if]: If you would prefer to put your 'dbase' file somewhere else you can, uncomment, then put the path to your file into the line that read `#dbasePath = 'a/path/of/your/choice'# user selected path`
+Create a file called 'dbase' and place it in your home directory's `.pandoc` directory, along with all that other good stuff.<sup id="a1">[1](#f1)</sup>
 
 Abbreviations can be added to this file, this make them available for use in all source documents. They are defined as `key=value` pairs, one per line; they have to look like this:
 
@@ -82,3 +80,8 @@ And that's it really.
 Tests have been whatever the opposite of 'thorough' is. As far as I can see it doesn't wreck any of the standard pandoc markdown functionality. I'd be interested to hear from anyone who has problems or doesn't get the results they are expecting.
 
 It'd be nice to be able to use this to insert boilerplate text snippets, but in order to do that we would need to deal with paragraphs. I'm certain this is fairly straightforward but I'm sick of dealing with json for the time being... maybe next year:wink:
+
+----
+
+<b id="f1">1</b> Footnote content here.
+If you would prefer to put your 'dbase' file somewhere else you can put the path to your file into the line that read `#dbasePath = 'a/path/of/your/choice'# user selected path` (make sure you uncomment it!) And indeed you can call the file whatever you want. [↩](#a1)
