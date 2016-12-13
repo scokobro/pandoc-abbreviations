@@ -26,11 +26,11 @@ It doesn't really matter which but you should know that abbreviations defined in
 
 ## The 'dbase' file
 
-Create a file called 'dbase' and place it in your `.pandoc` directory along with all that other good stuff.[^if]
+Create a file called 'dbase' and place it in your home directory's `.pandoc` directory, along with all that other good stuff.[^if]
 
 [^if]: If you would prefer to put your 'dbase' file somewhere else you can, uncomment, then put the path to your file into the line that read `#dbasePath = 'a/path/of/your/choice'# user selected path`
 
-Abbreviations are defined as `key=value` pairs, one per line; they have to look like this:
+Abbreviations can be added to this file, this make them available for use in all source documents. They are defined as `key=value` pairs, one per line; they have to look like this:
 
 ```
 ltd=limited
@@ -59,18 +59,20 @@ As you can see, in the metadata definitions, abbreviations keys need to start wi
 When you're happy with your abbreviation/expansion definitions, you can then begin to use them in your writing. To use an abbrev.(I'm abbreviating as it's getting tedious) just include the `key` preceded by one '+' sign. So, assuming we are using the definitions created above we would write this:
 
 ```md
-Are you studying +ir?
+## Studying +ir
 
 The study of *+ir* has been proved to be **+di** and, +afaik, is unlikely to lead to nirvana.
 ```
 
 and, when the document is processed, end up with:
 
->Are you studying international relations?
+>## Studying international relations {-}
 >
 >The study of *international relations* has been proved to be **discombobulatory** and, as far as I know, is unlikely to lead to nirvana.
 
-Notice that you can use the usual markdown text formatting techniques around abbreviations. And that's it, pretty straightforward really.
+Notice that you can use the usual markdown text formatting techniques around abbreviations. Punctuation is also preserved properly.
+
+And that's it really.
 
 # Problems and limitations
 Tests have been whatever the opposite of 'thorough' is. As far as I can see it doesn't wreck any of the standard pandoc markdown functionality. I'd be interested to hear from anyone who has problems or doesn't get the results they are expecting.
