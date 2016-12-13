@@ -9,7 +9,7 @@ This project was created to provide a simple alternative to the kind of user-def
 \newcommand{\osh}{oshigami}
 ```
 
-which , when the source document is processed, replace the typed abbreviations (i.e. `\hb` above) with the word in the final curly brackets, the expansion.
+which, when the source document is processed, replace the typed abbreviations (i.e. `\hb` above) with the word in the final curly brackets, the expansion.
 
 This is useful to me, as I am sure it is to many writers, as a way of ensuring consistency across uses of a single term or phrase. For instance, I write about the mass media in Japan, so I mention the titles of newspapers quite a lot; some journals want the Japanese term for newspaper transliterated 'shimbun' and some want 'shinbun'. I eventually realised, after initially going down the obvious 'search-replace' route, that it would just be easier to be able to replace every occurrence with an abbreviation (the macros mentioned above when I was writing in LaTeX) the expansion of which could be adjusted ad hoc. And this is my attempt to replicate that convenience when writing in pandoc markdown.
 
@@ -57,8 +57,8 @@ title: Pythoning and Pythoneers
 
 As you can see, in the metadata definitions, abbreviations keys need to start with a '+'. The character after the '+' *must* be alphabetic. Be aware that these will override the definitions in the 'dbase' file.
 
-# Using abbreviations in source document
-When you're happy with your abbreviation/expansion definitions, you can then begin to use them in your writing. To use an abbrev.(I'm abbreviating as it's getting tedious) just include the `key` preceded by one '+' sign. So, assuming we are using the definitions created above we would write this:
+# Using abbreviations in source documents
+When you're happy with your abbreviation/expansion definitions, you can then begin to use them in your writing. To use an abbrev.(I'm abbreviating as it's getting tedious) just include the `key` preceded by one '+' sign. So, assuming we are using the definitions created above we would write:
 
 ```markdown
 ## Studying +ir
@@ -66,7 +66,11 @@ When you're happy with your abbreviation/expansion definitions, you can then beg
 The study of *+ir* has been proved to be **+di** and, +afaik, is unlikely to lead to nirvana.
 ```
 
-and, when the document is processed, end up with:
+and, when the document is processed, for instance, like this;
+
+`pandoc test.md -t odt -o test.odt --filter=abbrevs.py`
+
+you end up with;
 
 >## Studying international relations
 >
@@ -83,5 +87,4 @@ It'd be nice to be able to use this to insert boilerplate text snippets, but in 
 
 ----
 
-<b id="f1">1</b> Footnote content here.
-If you would prefer to put your 'dbase' file somewhere else you can put the path to your file into the line that read `#dbasePath = 'a/path/of/your/choice'# user selected path` (make sure you uncomment it!) And indeed you can call the file whatever you want. [↩](#a1)
+<b id="f1">1</b> If you would prefer to put your 'dbase' file somewhere else you can put the path to your file into the line that reads `#dbasePath = 'a/path/of/your/choice'# user selected path` (make sure you uncomment it!) And indeed you can call the file whatever you want. [↩](#a1)
