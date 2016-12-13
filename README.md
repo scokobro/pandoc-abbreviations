@@ -1,20 +1,24 @@
 # pandoc-abbreviations
 Pandoc filter in python to replace listed abbreviations with their expansions.
 
-# Why?
+# This project's aim
 This project was created to provide a simple alternative to the kind of user-definable macros available in LaTeX, for instance...
 
 ```TeX
 \newcommand{\hb}{hanbaiten}
-\newcommand{\og}{oshigami}
+\newcommand{\osh}{oshigami}
 ```
 
-which replace the two letter abbreviation with the word in the final curly brackets when the source document is processed.
+which , when the source document is processed, replace the abbreviations (i.e. `\hb` above) with the word in the final curly brackets, the expansion.
 
-This is useful to me, as I am sure it is to many academics, as a way of ensuring consistency across uses of a single term or phrase. For instance, I write about the mass media in Japan, so I mention the titles of newspapers quite a lot; some journals want the Japanese term for newspaper transliterated 'shimbun' and some want 'shinbun'. I eventually realised, after initially going down the obvious 'search-replace' route, that it would just be easier to be able to replace every occurrence with an abbreviation that could be adjusted ad hoc. And this is my attempt to bring that convenience to writing in pandoc markdown.
+This is useful to me, as I am sure it is to many writers, as a way of ensuring consistency across uses of a single term or phrase. For instance, I write about the mass media in Japan, so I mention the titles of newspapers quite a lot; some journals want the Japanese term for newspaper transliterated 'shimbun' and some want 'shinbun'. I eventually realised, after initially going down the obvious 'search-replace' route, that it would just be easier to be able to replace every occurrence with an abbreviation (the macros mentioned above when I was writing in LaTeX) that could be adjusted ad hoc. And this is my attempt to bring that convenience to writing in pandoc markdown.
 
 # Installation
-'Installing' seems like rather a grand word for this: Copy the `abbrevs.py` file into your home `.pandoc/filters/` directory. Bingo. Read on...
+'Installing' seems like rather a grand word for this: Copy the `abbrevs.py` file into your home directory's `.pandoc/filters/` directory.
+
+This filter relies on the functionality of the [pandocfilters](https://github.com/jgm/pandocfilters) project so please make sure it's installed.
+
+Bingo. Read on...
 
 # Defining abbreviations
 Abbreviations and their expansions have to be defined before you can use them, they can be stored in two different places;
@@ -39,7 +43,7 @@ ir=International Relations
 j=日本
 ```
 
-Keys have to be alphabetic. As you can see, expansions (the stuff to the right of the '=') can contain multiple words (unfortunately not paragraphs though) and the double-byte characters used in CJK languages.
+Keys (the bit on the left of the '=') have to be alphabetic. As you can see, expansions (the stuff to the right of the '=') can contain multiple words (unfortunately not paragraphs though) and the double-byte characters used in CJK languages.
 
 ## Definitions in metadata
 If you want to define local abbreviations in your source document then you can add some `key: value` entries to the metadata at the start if your file. For instance;
@@ -53,7 +57,7 @@ title: Pythoning and Pythoneers
 ---
 ```
 
-As you can see, in the metadata definitions, abbreviations keys need to start with a '+'. The character after the '+' *must* be alphabetic.
+As you can see, in the metadata definitions, abbreviations keys need to start with a '+'. The character after the '+' *must* be alphabetic. Be aware that these will override the definitions in the 'dbase' file.
 
 # Using abbreviations in source document
 When you're happy with your abbreviation/expansion definitions, you can then begin to use them in your writing. To use an abbrev.(I'm abbreviating as it's getting tedious) just include the `key` preceded by one '+' sign. So, assuming we are using the definitions created above we would write this:
