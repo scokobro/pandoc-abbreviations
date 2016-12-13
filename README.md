@@ -58,7 +58,7 @@ As you can see, in the metadata definitions, abbreviations keys need to start wi
 # Using abbreviations in source document
 When you're happy with your abbreviation/expansion definitions, you can then begin to use them in your writing. To use an abbrev.(I'm abbreviating as it's getting tedious) just include the `key` preceded by one '+' sign. So, assuming we are using the definitions created above we would write this:
 
-```md
+```markdown
 ## Studying +ir
 
 The study of *+ir* has been proved to be **+di** and, +afaik, is unlikely to lead to nirvana.
@@ -66,11 +66,11 @@ The study of *+ir* has been proved to be **+di** and, +afaik, is unlikely to lea
 
 and, when the document is processed, end up with:
 
->## Studying international relations {-}
+>## Studying international relations
 >
 >The study of *international relations* has been proved to be **discombobulatory** and, as far as I know, is unlikely to lead to nirvana.
 
-Notice that you can use the usual markdown text formatting techniques around abbreviations. Punctuation is also preserved properly.
+Notice that you can use the usual markdown headers and text formatting techniques around abbreviations. Punctuation is also preserved properly.
 
 And that's it really.
 
