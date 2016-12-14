@@ -27,13 +27,7 @@ def abbreplace(key, value, format, meta):
     # add abbreviations from file metadata
     for k, v in meta.items():#get keys, values for all metadata
         if k.startswith('+'):# does the key start with a plus sign?
-            expan = ''# clear the string which the expansion will be stored in
-            for i in range(len(v['c'])):# check all elements in a metadata item
-                if v['c'][i]['t'] == 'Space': # if it's type 'space' then add a space to the result
-                    expan = expan + " "
-                elif 'Str' in v['c'][i]['t']: # if it's a string, add the string
-                    expan = expan + v['c'][i]['c']
-            abbrevlist[str(k.strip('+'))] = expan # add key and value to the abbrev dictionary
+            abbrevlist[str(k.strip('+'))] = stringify(v['c']) # add key and value to the abbrev dictionary
 
     if key == 'Str' and value.startswith('+'):# is the string an abbrev? (starts with a plus?)
         bare = value.strip('.,;:')# get the bare abbrev string
