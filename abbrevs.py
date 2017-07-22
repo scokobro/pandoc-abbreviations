@@ -9,6 +9,7 @@ If an abbreviation cannot be found, it will be marked in output with double excl
 import sys
 import json
 import os
+import re
 from pandocfilters import *
 
 home = os.environ['HOME']
@@ -16,6 +17,7 @@ dbasePath = home + '/.pandoc/dbase'# path to abbrev dbase file
 #dbasePath = 'a/path/of/your/choice'# user selected path
 abbrevlist = {}# create empty dictionary for abbrev=expansion list
 f = open(dbasePath, 'r')# open dbase file for reading
+regex = re.compile('^\+|^\(\+|^\[\+|^\{\+')#create pattern to detect abbreviations, starting with a + but may be preceded by some sort of bracket/parenthesis etc
 
 # add abbreviations and expansions from dbase file
 for line in f:
@@ -29,11 +31,15 @@ def abbreplace(key, value, format, meta):
         if k.startswith('+'):# does the key start with a plus sign?
             abbrevlist[str(k.strip('+'))] = stringify(v['c']) # add key and value to the abbrev dictionary
 
-    if key == 'Str' and value.startswith('+'):# is the string an abbrev? (starts with a plus?)
-        bare = value.strip('.,;:')# get the bare abbrev string
-        punct = value.lstrip(bare)# remove bare string from left leaving any punctuation on right
+    if key == 'Str' and re.match(regex, value):# is the string an abbrev? (starts with a plus/bracket? see line 20)
+        bare = value.strip('.,;:(()[]{}')# get the bare abbrev string by stripping potential punctutation
+        rp = value.lstrip('.,;: ()[]{}')# strip punct chars from left
+        rp2 = rp.lstrip(bare)# strip abbrev from left, leaving only punct chars on right of abbreviations
+        lp = value.rstrip('.,;: ()[]{}')
+        lp2 = lp.rstrip(bare)# same as previous two lines but on LHS
+
         if bare.strip('+') in abbrevlist:# check the key(ie abbrev) is defined
-            return Str(abbrevlist[bare.strip('+')] + punct)# send back the 'value' of the abbrev 'key', add punct.
+            return Str(lp2 + abbrevlist[bare.strip('+')] + rp2)# send back the 'value' of the abbrev 'key', adding stored punctuation
         else:# if abbrev is not defined in dbase
             return Str(value + '!!')# send back the original with a warning.
 
