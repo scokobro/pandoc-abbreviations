@@ -13,6 +13,15 @@ which, when the source document is processed, replace the typed abbreviations (i
 
 This is useful to me, as I am sure it is to many writers, as a way of ensuring consistency across uses of a single term or phrase. For instance, I write about the mass media in Japan, so I mention the titles of newspapers quite a lot; some journals want the Japanese term for newspaper transliterated 'shimbun' and some want 'shinbun'. I eventually realised, after initially going down the obvious 'search-replace' route, that it would just be easier to be able to replace every occurrence with an abbreviation (the macros mentioned above when I was writing in LaTeX) the expansion of which could be adjusted ad hoc. And this is my attempt to replicate that convenience when writing in pandoc markdown.
 
+**Note:** As of 22 June 2017 the filter script has been updated to deal with abbreviations enclosed in brackets or followed by footnote markers, so the following ...
+
+```markdown
+This is (+afaik) acceptable.
+
+This again, +afaik[^fn1], is acceptable.
+```
+will be expanded as expected.
+
 # Installation
 'Installing' seems like rather a grand word for this: Copy the `abbrevs.py` file into your home directory's `.pandoc/filters/` directory.
 
